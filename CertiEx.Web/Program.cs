@@ -26,6 +26,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.SignIn.RequireConfirmedEmail = false;
     options.SignIn.RequireConfirmedAccount = false;
 }).AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddHttpContextAccessor();
 
