@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace CertiEx.Domain.User;
 
-public class ApplicationUser
+public class ApplicationUser : IdentityUser
 {
     [Display(Name = "First Name")]
     [StringLength(30)]
