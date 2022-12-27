@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertiEx.Web", "CertiEx.Web\CertiEx.Web.csproj", "{01E266C4-320A-4A06-B238-48F7BE5A21DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CertiEx.Web", "CertiEx.Web\CertiEx.Web.csproj", "{01E266C4-320A-4A06-B238-48F7BE5A21DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertiEx.Dal", "CertiEx.Dal\CertiEx.Dal.csproj", "{3B650168-11A3-4E77-8B22-1CBB35F73A80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CertiEx.Dal", "CertiEx.Dal\CertiEx.Dal.csproj", "{3B650168-11A3-4E77-8B22-1CBB35F73A80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertiEx.Domain", "CertiEx.Domain\CertiEx.Domain.csproj", "{A1339E35-63D4-4FDF-A164-60683250167A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CertiEx.Domain", "CertiEx.Domain\CertiEx.Domain.csproj", "{A1339E35-63D4-4FDF-A164-60683250167A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertiEx.Business", "CertiEx.Business\CertiEx.Business.csproj", "{58B6080E-5ED1-499F-8E18-E7A0BDE1970E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CertiEx.Business", "CertiEx.Business\CertiEx.Business.csproj", "{58B6080E-5ED1-499F-8E18-E7A0BDE1970E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertiEx.Common", "CertiEx.Common\CertiEx.Common.csproj", "{86047200-79C5-4748-A2DF-140064239004}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{58B6080E-5ED1-499F-8E18-E7A0BDE1970E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58B6080E-5ED1-499F-8E18-E7A0BDE1970E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58B6080E-5ED1-499F-8E18-E7A0BDE1970E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86047200-79C5-4748-A2DF-140064239004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86047200-79C5-4748-A2DF-140064239004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86047200-79C5-4748-A2DF-140064239004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86047200-79C5-4748-A2DF-140064239004}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

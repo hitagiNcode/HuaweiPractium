@@ -1,4 +1,4 @@
-﻿namespace CertiEx.Business
+﻿namespace CertiEx.Common
 {
     public class Class1
     {

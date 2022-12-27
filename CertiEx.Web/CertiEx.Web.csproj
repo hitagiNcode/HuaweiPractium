@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CertiEx.Business\CertiEx.Business.csproj" />
+    <ProjectReference Include="..\CertiEx.Common\CertiEx.Common.csproj" />
     <ProjectReference Include="..\CertiEx.Dal\CertiEx.Dal.csproj" />
   </ItemGroup>
 

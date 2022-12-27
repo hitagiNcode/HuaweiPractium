@@ -15,4 +15,7 @@ public class ApplicationUser : IdentityUser
 
     [Display(Name = "Registered Date")]
     public DateTime RegisterDate { get; set; } = DateTime.UtcNow;
+    
+    [MaxLength]
+    public string ImgFile { get; set; }  
 }
