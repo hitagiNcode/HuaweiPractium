@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -19,11 +18,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql
     builder.Configuration.GetConnectionString("DefaultConnection")
 ));
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.Password.RequiredLength = 4;
     options.Password.RequireUppercase = false;
     options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredUniqueChars = 1;
+    options.Password.RequireLowercase = false;
     options.SignIn.RequireConfirmedEmail = false;
     options.SignIn.RequireConfirmedAccount = false;
     options.User.RequireUniqueEmail = true;

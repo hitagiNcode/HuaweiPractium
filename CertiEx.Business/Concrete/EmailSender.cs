@@ -17,13 +17,14 @@ public class EmailSender : IEmailSender
         SendGridSecret = config.GetValue<string>("SendGridKey");
     }
 
-    public async Task SendEmailAsync(string email, string subject, string htmlMessage)
+    public Task SendEmailAsync(string email, string subject, string htmlMessage)
     {
-        if (string.IsNullOrEmpty(SendGridSecret))
-        {
-            throw new Exception("Null SendGridKey!!!");
-        }
-        await Execute(SendGridSecret, email, subject, htmlMessage);
+        return Task.CompletedTask;
+        //if (string.IsNullOrEmpty(SendGridSecret))
+        //{
+        //    throw new Exception("Null SendGridKey!!!");
+        //}
+        //await Execute(SendGridSecret, email, subject, htmlMessage);
     }
 
     public async Task Execute(string apiKey, string toEmail, string subject, string message)

@@ -5,18 +5,13 @@ namespace CertiEx.Domain;
 
 public class BaseEntity
 {
-    [Column(TypeName = "datetime")]
-    [DataType(DataType.DateTime)]
-    public DateTime? CreatedOn { get; set; }
+    public DateTime? CreatedOn { get; set; } = DateTime.UtcNow;
 
-    [Column(TypeName = "datetime")]
-    [DataType(DataType.DateTime)]
-    public DateTime? ModifiedOn { get; set; }
+    public DateTime? ModifiedOn { get; set; } = DateTime.UtcNow;
 
-    [Column(TypeName = "varchar(200)")]        
-    public string CreatedBy { get; set; }
+    public string CreatedBy { get; set; } = "System";
 
-    [Column(TypeName = "varchar(200)")]
-    public string ModifiedBy { get; set; }
-    public bool IsDeleted { get; set; }
+    public string ModifiedBy { get; set; } = "System";
+
+    public bool IsDeleted { get; set; } = false;
 }

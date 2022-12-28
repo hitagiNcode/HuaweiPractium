@@ -6,8 +6,8 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <a id="manage" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Profile" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fa fa-user"></i> Hello @UserManager.GetUserName(User)!</a>
-    <form id="logoutForm" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Logout" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-        <button id="logout" type="submit" class="nav-link btn btn-link text-dark"><i class="fa fa-sign-out"></i> Logout</button>
+    <form id="logoutForm" class="" title="Logout" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <button id="logout" type="submit" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"><i class="fa fa-sign-out"></i> Logout</button>
     </form>
 }
 else

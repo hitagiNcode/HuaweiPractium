@@ -7,7 +7,6 @@ public class Result:BaseEntity
     [Key]
     public int Sl_No { get; set; }
 
-    [MaxLength]
     public string SessionID { get; set; }
     public int CandidateID { get; set; }        
     public int ExamID { get; set; }
