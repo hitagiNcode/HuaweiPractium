@@ -26,7 +26,7 @@
             <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
                 <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" asp-controller="Home" asp-action="Index"><i class="fa fa-bars"></i></a>
                 <a class="w3-bar-item w3-button w3-padding-large w3-theme-d4" asp-controller="Home" asp-action="Index"><i class="fa fa-home w3-margin-right"></i>CertiEx</a>
-                <a asp-controller="Home" asp-action="Index" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-book"></i> Quiz</a>
+                <a asp-controller="Exam" asp-action="Index" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-book"></i> Exam</a>
                 <a asp-controller="Score" asp-action="Result" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-server"></i> Score Report</a>
                 <partial name="_LoginPartialCertiEx" />
             </div>
@@ -37,12 +37,12 @@
     <!-- Navbar on small screens -->
     <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
         <a asp-controller="Home" asp-action="Index" class="w3-bar-item w3-button w3-padding-large">Home</a>
-        <a asp-controller="Home" asp-action="Profile" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+        <a asp-controller="Exam" asp-action="Index" class="w3-bar-item w3-button w3-padding-large">Exam</a>
         <a asp-controller="Score" asp-action="Result" class="w3-bar-item w3-button w3-padding-large">Score Report</a>
         <partial name="_LoginPartial" />
     </div>
 
-    <main role="main" style="max-width:1400px;margin-top:60px" class="w3-container w3-content">
+    <main role="main" style="max-width:1400px; margin-top:60px" class="w3-container w3-content">
         @RenderBody()
     </main>
     <!-- Footer -->
