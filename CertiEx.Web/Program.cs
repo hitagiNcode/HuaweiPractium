@@ -5,7 +5,9 @@ using CertiEx.Dal.DbInit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using SendGrid.Helpers.Mail;
 using System.Globalization;
+using CertiEx.Common.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +39,9 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 // Transistents Services
 builder.Services.AddTransient<IDbInit, DbInit>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+//Settings
+builder.Services.Configure<RedisSettings>(builder.Configuration.GetSection("Redis"));
 
 // Scoped Services
 builder.Services.AddBusinessServices();

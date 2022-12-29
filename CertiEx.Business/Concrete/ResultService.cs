@@ -12,11 +12,13 @@ public class ResultService<TEntity> : IResultService<TEntity> where TEntity : Ba
     private readonly ApplicationDbContext _dbContext;
     private readonly UserManager<IdentityUser> _userManager;
     private readonly DbSet<TEntity> _dbSet;
+    private readonly ICacheService _cache;
 
-    public ResultService(ApplicationDbContext dbContext, UserManager<IdentityUser> userManager)
+    public ResultService(ApplicationDbContext dbContext, UserManager<IdentityUser> userManager, ICacheService cache)
     {
         _dbContext = dbContext;
         _userManager = userManager;
+        _cache = cache;
         _dbSet = dbContext.Set<TEntity>();
     }
 

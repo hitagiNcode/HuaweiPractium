@@ -14,9 +14,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.12" />
     <PackageReference Include="SendGrid" Version="9.28.1" />
+    <PackageReference Include="StackExchange.Redis" Version="2.6.86" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CertiEx.Common\CertiEx.Common.csproj" />
     <ProjectReference Include="..\CertiEx.Dal\CertiEx.Dal.csproj" />
   </ItemGroup>
 
