@@ -6,7 +6,6 @@ public class Result:BaseEntity
 {
     [Key]
     public int Sl_No { get; set; }
-
     public string SessionID { get; set; }
     public string CandidateID { get; set; }        
     public int ExamID { get; set; }

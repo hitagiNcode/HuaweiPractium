@@ -10,7 +10,7 @@ namespace CertiEx.Business.Concrete;
 public class QuestionService<TEntity> : IQuestionService<TEntity> where TEntity : BaseEntity
 {
      private readonly ApplicationDbContext _dbContext;
-       private DbSet<TEntity> _dbSet;
+       private readonly DbSet<TEntity> _dbSet;
        public QuestionService(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;

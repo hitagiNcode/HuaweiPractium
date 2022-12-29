@@ -118,6 +118,7 @@ namespace CertiEx.Web.Controllers
                         objList.Add(obj);
                     }
                     i = await _result.AddResult(objList);
+                    await _result.CalculateResult(objList);
                 }
                
             }

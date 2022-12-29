@@ -18,7 +18,7 @@ public class DbInit : IDbInit
             _db.Exam.Add(new Exam
             {
                 Name = "Huawei Cloud Certified Associate",
-                FullMarks = 10,
+                FullMarks = 5,
                 Duration = 3
             });
 

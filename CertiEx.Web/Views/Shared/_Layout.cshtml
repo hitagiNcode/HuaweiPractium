@@ -35,19 +35,19 @@
     </nav>
 
     <!-- Navbar on small screens -->
-    <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+    <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-small">
         <a asp-controller="Home" asp-action="Index" class="w3-bar-item w3-button w3-padding-large">Home</a>
         <a asp-controller="Exam" asp-action="Index" class="w3-bar-item w3-button w3-padding-large">Exam</a>
         <a asp-controller="Score" asp-action="Result" class="w3-bar-item w3-button w3-padding-large">Score Report</a>
         <partial name="_LoginPartial" />
     </div>
 
-    <main role="main" style="max-width:1400px; margin-top:60px" class="w3-container w3-content">
+    <main role="main" style="max-width:1400px; margin-top:60px" class="w3-container w3-content flex-wrapper">
         @RenderBody()
     </main>
     <!-- Footer -->
 
-    <footer class="w3-container w3-theme-d5 w3-padding-3">
+    <footer class="w3-container w3-theme-d5 w3-padding-3 "">
         <marquee direction="left" style="padding-top: 8px">Things to remember ! The test is not official, it's just a nice way to see how much you know, or don't know, about the skill.</marquee>
         <h6>CertiEx - Developed by <a href="https://www.linkedin.com/in/baris-gunenc/" target="_blank">Barış Günenç</a></h6>
     </footer>

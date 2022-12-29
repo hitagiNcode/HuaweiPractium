@@ -27,33 +27,43 @@ public class ResultService<TEntity> : IResultService<TEntity> where TEntity : Ba
         return output;
     }
 
+    public async Task<bool> CalculateResult(List<Result> entity)
+    {
+        var exams = await _dbContext.Exam.ToListAsync();
+        var examName = exams.Find(r => r.ExamID == entity.First().ExamID)?.Name ?? "Test Exam";
+        var correctAnswers = entity.Count(result => result.IsCorrent);
+        
+        var score = correctAnswers * 100;
+
+        return true;
+    }
+
     public async Task<IEnumerable<QuizAttempt>> GetAttemptHistory(string argCandidateID)
     {
         try
         {
-            var r = new Random();
+            var rran = new Random();
             var exams = await _dbContext.Exam.ToListAsync();
             var candidateHistory = await _dbContext.Result.Where(r => r.CandidateID == argCandidateID).ToListAsync();
 
             var sessionHistory = candidateHistory.GroupBy(r => r.SessionID).Select(r => r.Key).ToList();
 
-
             var quizAttempts = new List<QuizAttempt>();
 
             foreach (var session in sessionHistory)
             {
-                var answersOfSession = candidateHistory.Where(r => r.SessionID == session).ToList();
+                var answersOfSession = candidateHistory.Where(result => result.SessionID == session).ToList();
 
-                var correctAnswers = answersOfSession.Count(r => r.IsCorrent);
+                var correctAnswers = answersOfSession.Count(result => result.IsCorrent);
                 var status = "Not Passed";
-                if (correctAnswers < answersOfSession.Count / 2)
+                if (correctAnswers >= answersOfSession.Count / 2)
                 {
                     status = "Passed";
                 }
 
                 quizAttempts.Add(new QuizAttempt
                 {
-                    Sl_No = r.Next(0, 1000),
+                    Sl_No = rran.Next(0, 1000),
                     SessionID = session,
                     ExamID = answersOfSession.First().ExamID,
                     Exam = exams.Find(r => r.ExamID == answersOfSession.First().ExamID)?.Name ?? "Test Exam",

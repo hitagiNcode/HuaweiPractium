@@ -27,12 +27,12 @@ namespace CertiEx.Web.Controllers
         {
             try
             {
-                var _objCandidate = _userManager.GetUserAsync(User).Result;
+                var objCandidate = _userManager.GetUserAsync(User).Result;
 
-                IEnumerable<QuizAttempt> _obj = await _result.GetAttemptHistory(_objCandidate.Id);
-                Root objRoot = new Root(){
-                    objCandidate= _objCandidate,
-                    objAttempt = _obj.ToList() 
+                var obj = await _result.GetAttemptHistory(objCandidate.Id);
+                var objRoot = new Root{
+                    objCandidate= objCandidate,
+                    objAttempt = obj.ToList() 
                 };               
                 return View(objRoot);
             }
@@ -48,7 +48,7 @@ namespace CertiEx.Web.Controllers
         {
             try
             {
-                IEnumerable<QuizReport> lst = await _result.ScoreReport(argRpt);
+                var lst = await _result.ScoreReport(argRpt);
                 return Ok(lst.ToList());
             }
             catch (Exception ex)
