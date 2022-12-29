@@ -1,11 +1,11 @@
-using System.Globalization;
 using CertiEx.Business;
-using CertiEx.Dal;
 using CertiEx.Business.Concrete;
+using CertiEx.Dal;
 using CertiEx.Dal.DbInit;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 

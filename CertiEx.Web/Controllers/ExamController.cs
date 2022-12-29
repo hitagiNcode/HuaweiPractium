@@ -1,9 +1,10 @@
-﻿using CertiEx.Domain.Exam;
+﻿using CertiEx.Business.Abstract;
+using CertiEx.Domain.Exam;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Security.Claims;
-using CertiEx.Business.Abstract;
 
 namespace CertiEx.Web.Controllers
 {
@@ -60,6 +61,75 @@ namespace CertiEx.Web.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("~/api/Questions/{ExamID?}")]
+        public async Task<IActionResult> Questions(int ExamID)
+        {
+            try
+            {
+                QnA _obj = await _question.GetQuestionList(ExamID);
+                return Ok(_obj);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex.InnerException);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveRecoredFile()
+        {
+            return Json(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        [Route("~/api/Score")]       
+        public async Task<IActionResult> Score(List<Option> objRequest)
+        {
+            int i = 0;
+            bool IsCorrect = false;
+            List<Result> objList = null;
+            string _SessionID = null;
+            try
+            {               
+                if (objRequest.Count > 0)
+                {
+                    _SessionID = Guid.NewGuid() + "-" + DateTime.Now;
+                    objList = new List<Result>();
+                    foreach (var item in objRequest)
+                    {
+                        if (item.AnswerID == item.SelectedOption)
+                            IsCorrect = true;
+                        else
+                            IsCorrect = false;
+
+                        Result obj = new Result()
+                        {
+                            CandidateID = item.CandidateID,
+                            ExamID = item.ExamID,
+                            QuestionID = item.QuestionID,
+                            AnswerID = item.AnswerID,
+                            SelectedOptionID = item.SelectedOption,
+                            IsCorrent = IsCorrect,
+                            SessionID= _SessionID,
+                            CreatedBy = "SYSTEM",
+                            CreatedOn = DateTime.Now
+                        };
+                        objList.Add(obj);
+                    }
+                    i = await _result.AddResult(objList);
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                i = 0;
+                throw new Exception(ex.Message, ex.InnerException);           
+            }
+
+            return Ok(i);
+        }
+        
         private string GetUserId()
         {
             return User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "null";
