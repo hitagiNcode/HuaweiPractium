@@ -9,7 +9,7 @@ public class Request
 
 public class Option
 {
-    public int CandidateID { get; set; }
+    public string CandidateID { get; set; }
     public int ExamID { get; set; }
     public int QuestionID { get; set; }
     public int AnswerID { get; set; }

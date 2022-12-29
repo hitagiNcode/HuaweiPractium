@@ -8,7 +8,7 @@ public class Result:BaseEntity
     public int Sl_No { get; set; }
 
     public string SessionID { get; set; }
-    public int CandidateID { get; set; }        
+    public string CandidateID { get; set; }        
     public int ExamID { get; set; }
     public int QuestionID { get; set; }
     public int AnswerID { get; set; }

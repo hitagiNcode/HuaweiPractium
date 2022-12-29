@@ -31,20 +31,39 @@ public class ResultService<TEntity> : IResultService<TEntity> where TEntity : Ba
     {
         try
         {
-            var obj = new List<QuizAttempt>()
+            var r = new Random();
+            var exams = await _dbContext.Exam.ToListAsync();
+            var candidateHistory = await _dbContext.Result.Where(r => r.CandidateID == argCandidateID).ToListAsync();
+
+            var sessionHistory = candidateHistory.GroupBy(r => r.SessionID).Select(r => r.Key).ToList();
+
+
+            var quizAttempts = new List<QuizAttempt>();
+
+            foreach (var session in sessionHistory)
             {
-                new()
+                var answersOfSession = candidateHistory.Where(r => r.SessionID == session).ToList();
+
+                var correctAnswers = answersOfSession.Count(r => r.IsCorrent);
+                var status = "Not Passed";
+                if (correctAnswers < answersOfSession.Count / 2)
                 {
-                    Sl_No = 0,
-                    SessionID = "123",
-                    ExamID = 1,
-                    Exam = "Huawei Cloud Certified Associate",
-                    Date = DateTime.Now.ToString("dd/MM/yyyy"),
-                    Score = "500",
-                    Status = "Passed"
+                    status = "Passed";
                 }
-            };
-            return obj;
+
+                quizAttempts.Add(new QuizAttempt
+                {
+                    Sl_No = r.Next(0, 1000),
+                    SessionID = session,
+                    ExamID = answersOfSession.First().ExamID,
+                    Exam = exams.Find(r => r.ExamID == answersOfSession.First().ExamID)?.Name ?? "Test Exam",
+                    Date = answersOfSession.First().CreatedOn?.ToString("dd/MM/yyyy") ?? "01/01/2023",
+                    Score = (correctAnswers * 100).ToString(),
+                    Status = status
+                });
+            }
+
+            return quizAttempts;
         }
         catch (Exception ex)
         {

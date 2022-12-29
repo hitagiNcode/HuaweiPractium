@@ -248,38 +248,8 @@ $(document).ready(function () {
                     action: function () {
                         $.post('/api/Score/', { objRequest: result },
                          function (data) {
-                             if (data > 0) {
-                                 stop(checkTime);
-                                 StopRecord();
-                                 $('#btnSubmit').prop('disabled', true);
-                                 $("#eqReport").children().prop('disabled', false);
-                                 $("#eqReport a").attr("href", "/Score/Result");
-                                 $('#eqReport i').removeClass("w3-opacity-max");
-                                 $.alert({
-                                     type: 'green',
-                                     title: 'Success !',
-                                     content: 'Please check the score.',
-                                     boxWidth: '40%',
-                                     useBootstrap: false,
-                                     closeIcon: true,
-                                     closeIconClass: 'fa fa-close'
-                                 });
-                             }
-                             else {
-                                 $('#btnSubmit').prop('disabled', false);
-                                 $("#eqReport").children().prop('disabled', true);
-                                 $('#eqReport a').removeAttr("href");
-                                 $('#eqReport i').addClass("w3-opacity-max");
-                                 $.alert({
-                                     type: 'red',
-                                     title: 'Error !',
-                                     content: 'Please try again.',
-                                     boxWidth: '40%',
-                                     useBootstrap: false,
-                                     closeIcon: true,
-                                     closeIconClass: 'fa fa-close'
-                                 });
-                             }
+                             window.location.href = '/Score/Result/';
+                             
                          });
                     }
                 },
