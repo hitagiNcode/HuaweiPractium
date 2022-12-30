@@ -10,4 +10,5 @@ public interface ICacheService
     Task CleanCache();
 
     Task InitLeaderBoard(IEnumerable<ExamScore> scores);
+    Task<IEnumerable<Tuple<string, int>>> GetLeaderBoard();
 }

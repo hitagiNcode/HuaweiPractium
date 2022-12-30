@@ -11,11 +11,13 @@ namespace CertiEx.Web.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IResultService<Result> _result;
+        private readonly ICacheService _cache;
 
-        public ScoreController(IResultService<Result> result, UserManager<IdentityUser> userManager)
+        public ScoreController(IResultService<Result> result, UserManager<IdentityUser> userManager, ICacheService cache)
         {
             _result = result;
             _userManager = userManager;
+            _cache = cache;
         }
 
         public IActionResult Index()
@@ -30,10 +32,17 @@ namespace CertiEx.Web.Controllers
                 var objCandidate = _userManager.GetUserAsync(User).Result;
 
                 var obj = await _result.GetAttemptHistory(objCandidate.Id);
-                var objRoot = new Root{
-                    objCandidate= objCandidate,
-                    objAttempt = obj.ToList() 
-                };               
+
+                var userScores = await _cache.GetLeaderBoard();
+
+                var scoreList = userScores.Select(r => new UserScoreShort() { Username = r.Item1, Score = r.Item2 }).ToList();
+
+                var objRoot = new Root
+                {
+                    objCandidate = objCandidate,
+                    objAttempt = obj.ToList(),
+                    objLeaderboard = scoreList
+                };
                 return View(objRoot);
             }
             catch (Exception ex)

@@ -49,4 +49,10 @@ public class CacheService : ICacheService
             await _cacheDb.SortedSetAddAsync("REDIS_LEADERBOARD", score.Username.ToLower(), score.Score);
         }
     }
+
+    public async Task<IEnumerable<Tuple<string, int>>> GetLeaderBoard()
+    {
+        var scores = await _cacheDb.SortedSetRangeByRankWithScoresAsync("REDIS_LEADERBOARD", 0, 9, Order.Descending);
+        return scores.Select(r => new Tuple<string, int>(r.Element, (int)r.Score));
+    }
 }

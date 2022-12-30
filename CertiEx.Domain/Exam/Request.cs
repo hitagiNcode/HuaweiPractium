@@ -19,6 +19,7 @@ public class Root
 {
     public IdentityUser objCandidate { get; set; }
     public List<QuizAttempt> objAttempt { get; set; }
+    public List<UserScoreShort> objLeaderboard { get; set; }
 }
 public class QuizAttempt
 {

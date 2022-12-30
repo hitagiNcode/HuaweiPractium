@@ -29,7 +29,7 @@ public class ResultService<TEntity> : IResultService<TEntity> where TEntity : Ba
         return output;
     }
 
-    public async Task<bool> CalculateResult(List<Result> entity)
+    public async Task<bool> CalculateResultAddRedis(List<Result> entity)
     {
         var exams = await _dbContext.Exam.ToListAsync();
         var examName = exams.Find(r => r.ExamID == entity.First().ExamID)?.Name ?? "Test Exam";
@@ -70,6 +70,12 @@ public class ResultService<TEntity> : IResultService<TEntity> where TEntity : Ba
     {
         var allScores = GetAllScores().Result;
         _cache.InitLeaderBoard(allScores).Wait();
+    }
+
+    public async Task InitCacheAsync()
+    {
+        var allScores = await GetAllScores();
+        await _cache.InitLeaderBoard(allScores);
     }
 
     public async Task<IEnumerable<QuizAttempt>> GetAttemptHistory(string argCandidateID)
