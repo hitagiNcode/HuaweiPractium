@@ -50,6 +50,13 @@ builder.Services.AddBusinessServices();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddRazorPages();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -58,7 +65,7 @@ if (!app.Environment.IsDevelopment())
     //app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();

@@ -1,4 +1,5 @@
 ﻿using CertiEx.Domain.Exam;
+using Microsoft.EntityFrameworkCore;
 
 namespace CertiEx.Dal.DbInit;
 
@@ -13,6 +14,19 @@ public class DbInit : IDbInit
 
     public void Initialize()
     {
+        try
+        {
+            if (_db.Database.GetPendingMigrations().Any())
+            {
+                _db.Database.Migrate();
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+        
+
         if (!_db.Exam.Any())
         {
             _db.Exam.Add(new Exam
