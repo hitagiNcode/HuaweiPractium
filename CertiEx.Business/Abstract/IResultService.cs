@@ -9,4 +9,7 @@ public interface IResultService<TEntity>
     Task<int> AddResult(List<TEntity> entity);
     Task<bool> CalculateResult(List<Result> entity);
     Task<string> GetCertificateString(ReqCertificate argRpt);
+
+    Task<IEnumerable<ExamScore>> GetAllScores();
+    void InitCache();
 }

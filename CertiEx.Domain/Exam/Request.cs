@@ -27,7 +27,7 @@ public class QuizAttempt
     public int ExamID { get; set; }
     public string Exam { get; set; }
     public string Date { get; set; }
-    public string Score { get; set; }
+    public int Score { get; set; }
     public string Status { get; set; }
 }    
 public class QuizReport

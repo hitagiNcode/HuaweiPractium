@@ -34,10 +34,42 @@ public class ResultService<TEntity> : IResultService<TEntity> where TEntity : Ba
         var exams = await _dbContext.Exam.ToListAsync();
         var examName = exams.Find(r => r.ExamID == entity.First().ExamID)?.Name ?? "Test Exam";
         var correctAnswers = entity.Count(result => result.IsCorrent);
-        
+
         var score = correctAnswers * 100;
 
         return true;
+    }
+
+    public async Task<IEnumerable<ExamScore>> GetAllScores()
+    {
+        var scores = new List<ExamScore>();
+        var userList = await _userManager.Users.ToListAsync();
+        var exams = await _dbContext.Exam.ToListAsync();
+
+        foreach (var user in userList)
+        {
+            var userAttempts = await GetAttemptHistory(user.Id);
+            var userHighestScore = userAttempts?.OrderByDescending(r => r.Score).FirstOrDefault();
+            if (userHighestScore != null)
+            {
+                scores.Add(new ExamScore
+                {
+                    Score = userHighestScore.Score,
+                    Exam = exams.Find(r => r.ExamID == userHighestScore.ExamID)?.Name ?? "Test Exam",
+                    Username = user.UserName,
+                    Date = userHighestScore.Date,
+                    Status = userHighestScore.Status
+                });
+            }
+        }
+
+        return scores;
+    }
+
+    public void InitCache()
+    {
+        var allScores = GetAllScores().Result;
+        _cache.InitLeaderBoard(allScores).Wait();
     }
 
     public async Task<IEnumerable<QuizAttempt>> GetAttemptHistory(string argCandidateID)
@@ -70,7 +102,7 @@ public class ResultService<TEntity> : IResultService<TEntity> where TEntity : Ba
                     ExamID = answersOfSession.First().ExamID,
                     Exam = exams.Find(r => r.ExamID == answersOfSession.First().ExamID)?.Name ?? "Test Exam",
                     Date = answersOfSession.First().CreatedOn?.ToString("dd/MM/yyyy") ?? "01/01/2023",
-                    Score = (correctAnswers * 100).ToString(),
+                    Score = correctAnswers * 100,
                     Status = status
                 });
             }

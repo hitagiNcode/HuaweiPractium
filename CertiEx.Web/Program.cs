@@ -1,13 +1,14 @@
 using CertiEx.Business;
 using CertiEx.Business.Concrete;
+using CertiEx.Common.Settings;
 using CertiEx.Dal;
 using CertiEx.Dal.DbInit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using SendGrid.Helpers.Mail;
 using System.Globalization;
-using CertiEx.Common.Settings;
+using CertiEx.Business.Abstract;
+using CertiEx.Domain.Exam;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +66,8 @@ app.UseRouting();
 //SeedsDatabase
 using var scope = app.Services.CreateScope();
 var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInit>();
+var redisCacheInit = scope.ServiceProvider.GetRequiredService<IResultService<Result>>();
+redisCacheInit.InitCache();
 dbInitializer.Initialize();
 //!endseed
 

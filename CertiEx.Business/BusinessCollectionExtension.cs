@@ -10,9 +10,9 @@ public static class BusinessCollectionExtension
     public static IServiceCollection AddBusinessServices(this IServiceCollection services)
     {
         return services
-            .AddScoped<ICacheService, CacheService>()
             .AddScoped<IExamService<Exam>, ExamService<Exam>>()
             .AddScoped<IQuestionService<Question>, QuestionService<Question>>()
-            .AddScoped<IResultService<Result>, ResultService<Result>>();
+            .AddScoped<IResultService<Result>, ResultService<Result>>()
+            .AddScoped<ICacheService, CacheService>();
     }
 }

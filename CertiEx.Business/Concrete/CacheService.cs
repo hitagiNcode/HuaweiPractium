@@ -1,5 +1,6 @@
 ﻿using CertiEx.Business.Abstract;
 using CertiEx.Common.Settings;
+using CertiEx.Domain.Exam;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using StackExchange.Redis;
@@ -32,5 +33,20 @@ public class CacheService : ICacheService
     {
         var exists = _cacheDb.KeyExists(key);
         return exists && _cacheDb.KeyDelete(key);
+    }
+
+    public async Task CleanCache()
+    {
+        await _cacheDb.KeyDeleteAsync("*");
+    }
+
+    public async Task InitLeaderBoard(IEnumerable<ExamScore> scores)
+    {
+        await _cacheDb.KeyDeleteAsync("*");
+        
+        foreach (var score in scores)
+        {
+            await _cacheDb.SortedSetAddAsync("REDIS_LEADERBOARD", score.Username.ToLower(), score.Score);
+        }
     }
 }
